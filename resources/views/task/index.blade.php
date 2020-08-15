@@ -3,9 +3,15 @@
 @section('content')
 
 <!--ここにコンテンツを書-->
-<h1>タスク一覧</h1>
+ <div class="center jumbotron">
+        <div class="text-center">
+            <h1>タスクのメインページ</h1>
+        </div>
+    </div>
 
-　@if(count($tasks)>0)
+@if(Auth::check())
+<h1>タスク一覧</h1>
+　{{--@if(count($tasks)>0)--}}
    <table class="table table-striped">
        <thead>
            <tr>
@@ -14,6 +20,7 @@
                <th>タスク</th>
            </tr>
        </thead>
+        {!! link_to_route('tasks.create','新しいタスク',[],['class'=>'btn btn-primary'])!!}
        <tbody>
            @foreach($tasks as $task)
            <tr>
@@ -26,5 +33,5 @@
    </table>
    @endif
    
-   {!! link_to_route('tasks.create','新しいタスク',[],['class'=>'btn btn-primary'])!!}
+  
 @endsection

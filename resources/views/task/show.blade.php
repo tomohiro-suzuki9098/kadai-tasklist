@@ -3,7 +3,7 @@
 @section('content')
 
 <!--ここにコンテンツを書-->
-<h1>id = {{ $task->id }}のタスクの詳細ページ</h1>
+<h1>id {{ $task->id }}のタスクの詳細ページ</h1>
 
 <table class="table table-bordered">
     

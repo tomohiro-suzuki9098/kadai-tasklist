@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
+
+
 class TasksController extends Controller
 {
     /**
@@ -53,12 +55,12 @@ class TasksController extends Controller
             ]);
         
         $task = new Task;
+        $task->user_id = $request->user()->id;
         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
-        
         return redirect('/');
-    }
+}
 
     /**
      * Display the specified resource.
@@ -71,10 +73,13 @@ class TasksController extends Controller
         //
         $task = Task::findOrFail($id);
         
+        if(\Auth::id() === $task->user_id){
         return view('task.show',[
             'task'=> $task,
-            ]);
-    }
+            ]);}
+            else{ 
+            return redirect('/');
+        }    }
 
     /**
      * Show the form for editing the specified resource.
@@ -107,11 +112,13 @@ class TasksController extends Controller
             "content" => 'required | max:255'
             ]);
         
-        $task =Task::findOrFail($id);
+         $task =Task::findOrFail($id);
+        if(\Auth::id() === $task->user_id){
+        $task->user_id = $request->user()->id;
         $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
-        
+    }
         return redirect('/');
     }
 
@@ -125,9 +132,11 @@ class TasksController extends Controller
     {
         //
         $task = Task::findOrFail($id);
-        
-        $task->delete();
-        
+        //$task->delete();
+        if(\Auth::id() === $task->user_id){
+            $task->delete();
+        }
         return redirect('/');
+
     }
 }
