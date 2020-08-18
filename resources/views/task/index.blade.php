@@ -3,15 +3,10 @@
 @section('content')
 
 <!--ここにコンテンツを書-->
- <div class="center jumbotron">
-        <div class="text-center">
-            <h1>タスクのメインページ</h1>
-        </div>
-    </div>
 
-@if(Auth::check())
+{{--@if(Auth::check())--}}
+@if(count($tasks)>0)
 <h1>タスク一覧</h1>
-　{{--@if(count($tasks)>0)--}}
    <table class="table table-striped">
        <thead>
            <tr>

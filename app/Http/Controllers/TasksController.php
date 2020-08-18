@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Task;
 
-
+use App\User;
 
 class TasksController extends Controller
 {
@@ -18,11 +18,21 @@ class TasksController extends Controller
     public function index()
     {
         //
-        $tasks = Task::all();
-        
-        return view('task.index',[
-            'tasks'=>$tasks,
-            ]);
+       
+             $data=[];
+            if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->tasks()->paginate(10);
+            
+            $data =[
+                'user'=> $user,
+                'tasks'=>$tasks,
+                ];       
+}
+          
+            
+        return view('task.index',$data);
+    
     }
 
     /**
@@ -42,7 +52,7 @@ class TasksController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     *  
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -73,13 +83,13 @@ class TasksController extends Controller
         //
         $task = Task::findOrFail($id);
         
-        if(\Auth::id() === $task->user_id){
+       if(\Auth::id() === $task->user_id){
         return view('task.show',[
             'task'=> $task,
             ]);}
-            else{ 
+            
             return redirect('/');
-        }    }
+         }
 
     /**
      * Show the form for editing the specified resource.
