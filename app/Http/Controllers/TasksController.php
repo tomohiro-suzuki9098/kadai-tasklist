@@ -101,12 +101,13 @@ class TasksController extends Controller
     {
         //
         $task =  Task::findOrFail($id);
-        
+        if(\Auth::id() === $task->user_id){
         return view('task.edit',[
             'task'=>$task,
             ]);
     }
-
+              return redirect('/');
+}
     /**
      * Update the specified resource in storage.
      *
