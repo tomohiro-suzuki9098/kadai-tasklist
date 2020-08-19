@@ -15,7 +15,7 @@
                <th>タスク</th>
            </tr>
        </thead>
-        {!! link_to_route('tasks.create','新しいタスク',[],['class'=>'btn btn-primary'])!!}
+       
        <tbody>
            @foreach($tasks as $task)
            <tr>
@@ -27,6 +27,6 @@
        </tbody>
    </table>
    @endif
-   
+  {!! link_to_route('tasks.create','新しいタスク',[],['class'=>'btn btn-primary'])!!}  
   
 @endsection
