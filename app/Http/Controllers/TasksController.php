@@ -43,8 +43,8 @@ class TasksController extends Controller
     public function create()
     {
         //
-        $task = new Task;
         if(\Auth::id() === $task->user_id){
+        $task = new Task;
         
         return view('task.create',[
             'task' => $task,
