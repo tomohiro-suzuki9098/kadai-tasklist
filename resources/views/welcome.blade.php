@@ -11,7 +11,7 @@
                 {{-- 投稿一覧 --}}
                 @include('task.index')
         
-   @endif
+  　　　　 @endif
     
 
 @endsection

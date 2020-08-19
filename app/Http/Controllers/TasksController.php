@@ -19,7 +19,7 @@ class TasksController extends Controller
     {
         //
        
-             $data=[];
+            $data=[];
             if (\Auth::check()) {
             $user = \Auth::user();
             $tasks = $user->tasks()->paginate(10);
@@ -31,7 +31,7 @@ class TasksController extends Controller
 }
           
             
-        return view('task.index',$data);
+        return view('welcome',$data);
     
     }
 
