@@ -50,7 +50,7 @@ class TasksController extends Controller
             'task' => $task,
             ]);
         }
-        return back();
+        return redirect('/');
     }
 
     /**
